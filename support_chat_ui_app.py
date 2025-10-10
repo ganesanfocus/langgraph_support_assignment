@@ -1,5 +1,6 @@
+# support_chat_ui_app.py
 import streamlit as st
-from realtime_support_graph import app
+from realtime_support_graph import app  # realtime_support_graph.py
 from typing import Optional, List
 
 st.set_page_config(page_title="Real-Time AI Support Graph", page_icon="🤖", layout="centered")
@@ -13,7 +14,7 @@ with st.form("support_form"):
 
     user_id = st.text_input("User ID", value="U001")
     message = st.text_area("Message", placeholder="Describe your issue here...", height=150)
-    # context_text = st.text_area("Conversation history (optional)", placeholder="One message per line...")
+    context_text = st.text_area("Conversation history (optional)", placeholder="One message per line...")
     
     submitted = st.form_submit_button("Submit")
 
@@ -23,11 +24,11 @@ if submitted:
         st.error("Please enter a message.")
     else:
         # Build the state dictionary that matches SupportState
-        # context_list: Optional[List[str]] = [line.strip() for line in context_text.splitlines() if line.strip()]
+        context_list: Optional[List[str]] = [line.strip() for line in context_text.splitlines() if line.strip()]
         state = {
             "user_id": user_id,
-            "message": message
-            # "context": context_list
+            "message": message,
+            "context": context_list
         }
 
         st.info("⏳ Running support workflow...")
